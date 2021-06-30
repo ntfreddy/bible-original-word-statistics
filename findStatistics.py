@@ -28,11 +28,11 @@ def findDefinition(content):
 bibleType = "greek" #hebrew or greek
 codedWords = {}
 print("Starting ...................")
-with open('./hebrewWordsCode.txt', encoding='utf-8') as file:
+with open('./wordsCode.txt', encoding='utf-8') as file:
     wordList = [l.rstrip("\n") for l in file]
     wordFreq = wordListToFreqDict(wordList)
 
-    sortedWordFreq = {k: v for k, v in sorted(wordFreq.items(), key=lambda item: item[1])}
+    sortedWordFreq = {k: v for k, v in sorted(wordFreq.items(), reverse=True, key=lambda item: item[1])}
    
     #sortedWordFreq = wordFreq
     data = {}
@@ -42,6 +42,7 @@ with open('./hebrewWordsCode.txt', encoding='utf-8') as file:
 
     for key in sortedWordFreq.keys():
         urlName = "https://saintebible.com/" + bibleType + "/" + str(key) + ".htm"
+        data[key]['link'] = urlName
         print (urlName)
         x = urllib.request.urlopen(urlName)
         stream = x.read().decode("utf-8")
@@ -52,7 +53,7 @@ with open('./hebrewWordsCode.txt', encoding='utf-8') as file:
         data[key]['definition'] = defini['definition']
         
                 
-    print("Code\tOccurrences\tFrequency\tTranslation\tDefinition")
+    print("Code\tLink\t\t\t\t\t\t\t\t\t\tOccurrences\tFrequency\tTranslation\tDefinition")
     for key, value in data.items():
-        print(str(key) +  "\t" + str(value['occurrences']) +  "\t\t" + str(value['frequency']) +  "\t\t" + value['translation'] +  "\t\t" + value['definition'])
+        print(str(key) +  "\t" + str(value['link']) + "\t\t\t\t\t\t\t\t\t\t" + str(value['occurrences']) +  "\t\t" + str(value['frequency']) +  "\t\t" + value['translation'] +  "\t\t" + value['definition'])
         #print(str(key) +  "\t" + value['definition'])
