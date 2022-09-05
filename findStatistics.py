@@ -25,7 +25,7 @@ def findDefinition(content):
             return {'translation': result[0].strip(), 'definition': result[1].strip()}
     return  {'translation': "", 'definition': ""}
     
-bibleType = "greek" #hebrew or greek
+bibleType = "hebrew" #hebrew or greek
 codedWords = {}
 print("Starting ...................")
 with open('./wordsCode.txt', encoding='utf-8') as file:
@@ -53,7 +53,7 @@ with open('./wordsCode.txt', encoding='utf-8') as file:
         data[key]['definition'] = defini['definition']
         
                 
-    print("Code\tLink\t\t\t\t\t\t\t\t\t\tOccurrences\tFrequency\tTranslation\tDefinition")
+    print("Code\tLink\t\t\t\t\tOccurrences\tFrequency\tTranslation\tDefinition")
     for key, value in data.items():
-        print(str(key) +  "\t" + str(value['link']) + "\t\t\t\t\t\t\t\t\t\t" + str(value['occurrences']) +  "\t\t" + str(value['frequency']) +  "\t\t" + value['translation'] +  "\t\t" + value['definition'])
+        print(str(key) +  "\t" + str(value['link']) + "\t" + str(value['occurrences']) +  "\t\t" + str(value['frequency']) +  "\t\t" + value['translation'] +  "\t\t" + value['definition'])
         #print(str(key) +  "\t" + value['definition'])
